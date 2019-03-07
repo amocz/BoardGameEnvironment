@@ -28,6 +28,8 @@ public class Game extends JFrame implements ActionListener
 	private JButton playerProfile;
 	private JPanel panel;
 	private String p1name, p2name;
+	private int p1Score = 0;
+	private int p2Score = 0;
 	
 	//Description: set GUI related stuff
 	public Game()
@@ -115,8 +117,8 @@ public class Game extends JFrame implements ActionListener
       int result = JOptionPane.showConfirmDialog(null, myPanel, 
                "Please Enter Player's Usernames", JOptionPane.OK_CANCEL_OPTION);
       if (result == JOptionPane.OK_OPTION) {
-         System.out.println("Player 1 Name:" + p1username.getText());
-         System.out.println("Player 2 Name:" + p2username.getText());
+         //System.out.println("Player 1 Name:" + p1username.getText());
+         //System.out.println("Player 2 Name:" + p2username.getText());
          p1name = p1username.getText();
          p2name = p2username.getText();
       }
@@ -143,7 +145,11 @@ public class Game extends JFrame implements ActionListener
 			//Obutton.setEnabled(false);
 		}
 		else if(playerProfile == e.getSource()) {
-			String message = "Player 1:" + p1name + "\n Player 2:" + p2name;
+			String message = "Player 1: " + p1name + 
+					"\n Player 1 Score: " + Integer.toString(p1Score) +
+					"\n\n Player 2:" + p2name +
+					"\n Player 2 Score: " + Integer.toString(p2Score);
+					
 			JOptionPane.showMessageDialog(panel,
 				    message,
 				    "Player Profile",
