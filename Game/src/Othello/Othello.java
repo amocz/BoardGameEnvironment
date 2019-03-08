@@ -16,9 +16,25 @@ public class Othello {
     }
 
     public void makeNewGame() {
+
+        new GameState(new GameBoard(makeEmptyBoard(), width, height), 0,0, false, "WHITE", null)
+
     }
 
     public String determineWinner() {
         return new String();
+    }
+
+    public ArrayList<ArrayList<Cell>> makeEmptyBoard() {
+        ArrayList<ArrayList<Cell>> board = new ArrayList<ArrayList<Cell>>();
+
+        for(int i = 0; i < width; i++ ){
+            for(int j = 0; j < height; j++){
+                Cell cell = new Cell(i,j,"EMPTY");
+                board.get(i).get(j) = cell;
+            }
+        }
+
+        return board;
     }
 }
