@@ -1,4 +1,4 @@
-package game;
+
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,7 +21,7 @@ import java.awt.Insets;
 import java.awt.Dimension;
 import java.awt.Component;
 
-public class Games extends JFrame implements ActionListener
+public class Game extends JFrame implements ActionListener
 {	
 	private JButton TTTbutton;
 	private JButton BSbutton;
@@ -32,7 +32,7 @@ public class Games extends JFrame implements ActionListener
 	private Player p1, p2;
 	
 	//Description: set GUI related stuff
-	public Games()
+	public Game()
 	{
 		super();
 		p1 = new Player();
