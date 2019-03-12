@@ -1,3 +1,4 @@
+package game;
 
 public abstract class GameState {
     private String[][] boardstate;

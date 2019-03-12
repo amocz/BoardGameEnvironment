@@ -1,3 +1,4 @@
+package game;
 
 
 import javax.swing.JFrame;
@@ -14,6 +15,8 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
 import javax.swing.border.EmptyBorder;
+
+import tictactoe.TicTacToeBoard;
 
 //import tictactoe.TicTacToe;
 
@@ -124,7 +127,7 @@ public class Game extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e){
 		if(TTTbutton == e.getSource())
 		{
-			//TicTacToe t = new TicTacToe();
+			//TicTacToeBoard t = new TicTacToeBoard();
 			//t.setVisible(true);
 		}
 		else if(BSbutton == e.getSource())
