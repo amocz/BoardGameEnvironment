@@ -1,7 +1,5 @@
 package Othello;
-
 import java.util.ArrayList;
-
 
 public class Othello {
 
@@ -9,32 +7,19 @@ public class Othello {
     private int width;
     private int height;
 
-    private Othello(int width, int height) {
+    public Othello(int width, int height) {
+        gameState = new ArrayList<GameState>();
         this.width = width;
         this.height = height;
-        gameState = new ArrayList<GameState>();
     }
 
     public void makeNewGame() {
-
-        new GameState(new GameBoard(makeEmptyBoard(), width, height), 0,0, false, "WHITE", null)
-
+        gameState.add(new GameState(new GameBoard(width, height)));
     }
 
-    public String determineWinner() {
-        return new String();
-    }
-
-    public ArrayList<ArrayList<Cell>> makeEmptyBoard() {
-        ArrayList<ArrayList<Cell>> board = new ArrayList<ArrayList<Cell>>();
-
-        for(int i = 0; i < width; i++ ){
-            for(int j = 0; j < height; j++){
-                Cell cell = new Cell(i,j,"EMPTY");
-                board.get(i).get(j) = cell;
-            }
-        }
-
-        return board;
+    public String determineWinner(GameState gameState) {
+        if (gameState.getBlackScore() > gameState.getWhiteScore()) return "BLACK";
+        if (gameState.getBlackScore() < gameState.getWhiteScore()) return "WHITE";
+    	return "TIE";
     }
 }
