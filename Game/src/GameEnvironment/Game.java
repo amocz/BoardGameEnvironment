@@ -127,8 +127,8 @@ public class Game extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e){
 		if(TTTbutton == e.getSource())
 		{
-			//TicTacToeBoard t = new TicTacToeBoard();
-			//t.setVisible(true);
+			TicTacToeBoard t = new TicTacToeBoard();
+			t.setVisible(true);
 		}
 		else if(BSbutton == e.getSource())
 		{
