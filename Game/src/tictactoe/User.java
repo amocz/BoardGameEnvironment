@@ -16,7 +16,7 @@ public class User {
 			playerTurn.setText("PLAYER 2 TURN");
 		}
 		else {
-			button.setText("0");
+			button.setText("O");
 			playerTurn.setText("PLAYER 1 TURN");
 		}
 		
