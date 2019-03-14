@@ -8,7 +8,7 @@ public class Game {
 	private List<Player> players;
 	private Grid grid;
 	
-	Game(String name, List<Player> players, Grid grid){
+	public Game(String name, List<Player> players, Grid grid){
 		this.name = name;
 		this.players = players;
 		this.grid = grid;

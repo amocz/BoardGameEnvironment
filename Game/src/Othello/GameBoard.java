@@ -1,27 +1,14 @@
 package Othello;
+import GameEnvironment.Grid;
+
 import java.util.ArrayList;
 
-public class GameBoard {
+public class GameBoard extends Grid {
 
     private ArrayList<ArrayList<Cell>> board;
-    private int width;
-    private int height;
-
-    private ArrayList<ArrayList<Cell>> makeEmptyBoard() {
-    	ArrayList<ArrayList<Cell>> board = new ArrayList<ArrayList<Cell>>();
-    	
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                setCell(i, j, new Cell(i, j, "EMPTY"));
-            }
-        }
-        return board;
-    }
-    
     public GameBoard(int width, int height) {
+        super(width,height);
         this.board = makeEmptyBoard();
-        this.width = width;
-        this.height = height;
     }
 
     // width() returns the width of this Othello board.
@@ -31,19 +18,19 @@ public class GameBoard {
     
     // width() returns the width of this Othello board.
     public int getWidth() {
-        return width;
+        return getWidth();
     }
 
     // height() returns the height of this Othello board.
     public int getHeight() {
-        return height;
+        return getHeight();
     }
 
     // isValidCell() returns true if the given (x, y) is a valid
     // cell on this board -- i.e., if (x, y) is in the boundaries
     // of the board -- or false otherwise.
     public boolean isValidCell(int x, int y) { //IMPLEMENT
-        return x < width & y < height;
+        return x < getWidth() & y < getHeight();
     }
 
     // isCellEmpty() returns true if the given (x, y) is empty.
@@ -75,5 +62,15 @@ public class GameBoard {
     	if (getCell(x, y).isBlack()) setCell(x, y, new Cell(x, y, "WHITE"));
     }
 
+    private ArrayList<ArrayList<Cell>> makeEmptyBoard() {
+        ArrayList<ArrayList<Cell>> board = new ArrayList<ArrayList<Cell>>();
+
+        for (int i = 0; i < getWidth(); i++) {
+            for (int j = 0; j < getHeight(); j++) {
+                setCell(i, j, new Cell(i, j, "Empty"));
+            }
+        }
+        return board;
+    }
 
 }

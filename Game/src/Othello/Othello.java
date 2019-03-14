@@ -1,23 +1,24 @@
 package Othello;
+import GameEnvironment.Game;
+
 import java.util.ArrayList;
 
 public class Othello {
-
-    private ArrayList<GameState> gameState;
+    private ArrayList<OthelloGameState> gameState;
     private int width;
     private int height;
 
     public Othello(int width, int height) {
-        gameState = new ArrayList<GameState>();
+        gameState = new ArrayList<OthelloGameState>();
         this.width = width;
         this.height = height;
     }
 
     public void makeNewGame() {
-        gameState.add(new GameState(new GameBoard(width, height)));
+        gameState.add(new OthelloGameState(new GameBoard(width, height)));
     }
 
-    public String determineWinner(GameState gameState) {
+    public String determineWinner(OthelloGameState gameState) {
         if (gameState.getBlackScore() > gameState.getWhiteScore()) return "BLACK";
         if (gameState.getBlackScore() < gameState.getWhiteScore()) return "WHITE";
     	return "TIE";

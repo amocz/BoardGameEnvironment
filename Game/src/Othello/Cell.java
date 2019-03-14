@@ -1,26 +1,29 @@
 package Othello;
 
-public class Cell {
+import GameEnvironment.Element;
+
+public class Cell extends Element{
     private int xCoord;
     private int yCoord;
-    private String disk;
+    private String color;
 
 
-    public Cell(int xCoord, int yCoord, String disk){
+    public Cell(int xCoord, int yCoord, String color){
         this.xCoord = xCoord;
         this.yCoord = yCoord;
-        this.disk = disk;
+        this.color = color;
+        setPiecename("Disk");
     }
 
     public boolean isEmpty() {
-    	return disk.equals("EMPTY");
+    	return color.equals("EMPTY");
     }
 
     public boolean isWhite() {
-    	return disk.equals("WHITE");
+    	return color.equals("WHITE");
     }
 
     public boolean isBlack() {
-    	return disk.equals("BLACK");
+    	return color.equals("BLACK");
     }
 }
