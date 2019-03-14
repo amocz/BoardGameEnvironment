@@ -13,7 +13,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
-public class TicTacToeBoard extends JFrame implements ActionListener
+public class TicTacToeBoard implements ActionListener
 {
 	public static String PLAYER_1;
 	public static String PLAYER_2;
@@ -25,34 +25,36 @@ public class TicTacToeBoard extends JFrame implements ActionListener
 	
 	private JButton[][] button;
 	private JLabel playerTurn;
+	private JFrame frame;
 	
 	//Description: set GUI related stuff
 	//PreCondition: none
 	//PostCondition: Sets size, title, JLabel, JButton, JPanel
 	public TicTacToeBoard(Game gb)
 	{
-		super();
+		frame = new JFrame();
 		HEIGHT = gb.getGrid().getHeight();
 		WIDTH = gb.getGrid().getWidth();
 		PLAYER_1 = gb.getPlayers().get(0).getName();
 		PLAYER_2 = gb.getPlayers().get(1).getName();
 		players = gb.getPlayers();
 		
-		this.setSize(WIDTH, HEIGHT);
-		this.setResizable(false);
-		this.setTitle(gb.getName());
+		frame.setSize(WIDTH, HEIGHT);
+		frame.setResizable(false);
+		frame.setTitle(gb.getName());
+		frame.setVisible(true);
 		
 		//top
-		setLayout(new BorderLayout());
+		frame.setLayout(new BorderLayout());
 		
 		//Center
 		JPanel grid = new JPanel();
 		grid.setLayout(new GridLayout(COLUMN, ROW));
-		this.add(grid, BorderLayout.CENTER);
+		frame.add(grid, BorderLayout.CENTER);
 		
 		//player turn stats
 		playerTurn =  new JLabel(PLAYER_1.toUpperCase() + "'S TURN" );
-		add(playerTurn, BorderLayout.NORTH);
+		frame.add(playerTurn, BorderLayout.NORTH);
 		
 		//creates 9 buttons
 		button = new JButton[COLUMN][ROW];		
@@ -72,28 +74,45 @@ public class TicTacToeBoard extends JFrame implements ActionListener
 	//PostCondition: prints out either an o or an x and if winner or tie is found
 	//then winner or tie is announced at the top
 	int count = 0;
+
 	public void actionPerformed(ActionEvent e)
 	{ 
+		Player A = new Player(PLAYER_1);
+		Player B = new Player(PLAYER_2);
+		TicTacToe ttt = new TicTacToe();
+
 		for(int i = 0; i < 3; i++)
 		{
 			for(int j = 0; j < 3; j++){
 				if(button[i][j] == e.getSource())
 				{	
-					User p = new User();
-					p.make_move(button[i][j], count, playerTurn, PLAYER_1, PLAYER_2);
+					
+					TicTacToeGameState gamestate1 = new TicTacToeGameState(A);
+					TicTacToeGameState gamestate2 = new TicTacToeGameState(B);
+					ttt.make_move(button[i][j], count, playerTurn, gamestate1.getPlayerTurn().getName(),gamestate2.getPlayerTurn().getName());
+					
+					
 				}
 			}
 		}
 		//check for winner
-		TicTacToe ttt = new TicTacToe();
-		ttt.checkForWinner(button, playerTurn, count, this, players);
+		ttt.checkForWinner(button, playerTurn, count, frame, players);
 
 		//check for tie
-		ttt.checkForTie(playerTurn, this, count, button);
+		ttt.checkForTie(playerTurn, frame, count, button);
 
 		count++;			
 	}
 	
+	public Player change_turn(Player A) {
+		if (A.getName().equals(PLAYER_1)) {
+
+			return new Player(PLAYER_2);
+		}
+		else {
+			return new Player(PLAYER_1);
+		}
+	}
 
 	
 

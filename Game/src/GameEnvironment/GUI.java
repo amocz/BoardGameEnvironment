@@ -1,6 +1,5 @@
 package GameEnvironment;
 
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -129,7 +128,6 @@ public class GUI extends JFrame implements ActionListener
 		if(TTTbutton == e.getSource())
 		{
 			TicTacToeBoard t = new TicTacToeBoard(new Game("Tic Tac Toe", players, new Grid(500,500)));
-			t.setVisible(true);
 		}
 		else if(BSbutton == e.getSource())
 		{
@@ -142,9 +140,9 @@ public class GUI extends JFrame implements ActionListener
 		}
 		else if(playerProfile == e.getSource()) {
 			String message = "Player 1: " + p1.getName() + 
-					"\n Player 1 Score: " + p1.getScore() +
-					"\n\n Player 2:" + p2.getName() +
-					"\n Player 2 Score: " + p2.getScore();
+					"\nPlayer 1 Score: " + p1.getScore() +
+					"\n\nPlayer 2:" + p2.getName() +
+					"\nPlayer 2 Score: " + p2.getScore();
 					
 			JOptionPane.showMessageDialog(panel,
 				    message,

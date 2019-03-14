@@ -1,6 +1,7 @@
 package tictactoe;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -118,6 +119,29 @@ public class TicTacToe
 			JLabel tie = new JLabel("IT'S A TIE");
 			frame.add(tie, BorderLayout.NORTH);
 		}
+	}
+	
+	public void make_move(JButton button, int count, JLabel playerTurn, String p1, String p2) {
+		TicTacToeElement element = new TicTacToeElement();
+		
+		
+		if(count % 2 == 0) {
+			button.setText(element.getName1());
+			playerTurn.setText(p2.toUpperCase() + "'S TURN");
+			//System.out.println("P2: " + p2);
+			//System.out.println(playerTurn.getText());
+		}
+		else {
+			button.setText(element.getName2());
+			playerTurn.setText(p1.toUpperCase() + "'S TURN");
+		}
+		
+		button.setFont(new Font("Arial", Font.BOLD,75));
+		//button[i].setForeground(Color.RED);
+
+		button.setEnabled(false);
+		
+		
 	}
 	
 	

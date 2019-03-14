@@ -13,7 +13,7 @@ public class Game {
 		this.players = players;
 		this.grid = grid;
 	}
-
+	
     public String getName() {
         return name;
     }
