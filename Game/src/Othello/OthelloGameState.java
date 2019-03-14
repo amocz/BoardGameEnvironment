@@ -1,21 +1,21 @@
 package Othello;
+import GameEnvironment.GameState;
+
 import java.util.ArrayList;
 
-public class GameState {
+public class OthelloGameState extends GameState {
 
     private GameBoard gameBoard;
     private int blackScore, whiteScore;
     private boolean gameOver;
-    private String turn;
-    private String winner;
+    private String playerTurn;
 
-    public GameState(GameBoard gameBoard) {
+    public OthelloGameState(GameBoard gameBoard) {
         this.gameBoard = gameBoard;
         this.blackScore = 0;
         this.whiteScore = 0;
         this.gameOver = false;
-        this.turn = "WHITE";
-        this.winner = null;
+        this.playerTurn = "WHITE";
     }
 
     // getGameBoard() returns a reference to a constant OthelloBoard describing
@@ -34,11 +34,6 @@ public class GameState {
        return whiteScore;
     }
 
-    // getWinner() returns the winner
-    public String getWinner() {
-        return winner;
-    }
-
     // isGameOver() returns true if the game is over in this game state,
     // false otherwise.
     public boolean isGameOver() {
@@ -48,13 +43,13 @@ public class GameState {
     // isBlackTurn() returns true if it is currently the black player's
     // turn in this game state, false otherwise.
     public boolean isBlackTurn() {
-        return turn.equals("BLACK");
+        return playerTurn.equals("BLACK");
     }
 
     // isWhiteTurn() returns true if it is currently the white player's
     // turn in this game state, false otherwise.
     public boolean isWhiteTurn() {
-    	return turn.equals("WHITE");
+    	return playerTurn.equals("WHITE");
     }
 
     // isValidMove() returns true if the current player whose turn it is
@@ -67,7 +62,6 @@ public class GameState {
     // the current player at cell (x, y).
     public void makeMove(int x, int y) { //IMPLEMENT
         if (isValidMove(x,y)) {
-
         }
     }
     
