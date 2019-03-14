@@ -1,10 +1,9 @@
 package GameEnvironment;
 
-public class GameTester
-{	
+public class Main {
 	public static void main(String[] args)
 	{
-		Game g = new Game();
+		GUI g = new GUI();
 		g.setVisible(true);
 	}
 }

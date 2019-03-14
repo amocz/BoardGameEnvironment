@@ -1,11 +1,13 @@
 package tictactoe;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import GameEnvironment.Player;
 
 public class TicTacToe 
 {
@@ -71,27 +73,27 @@ public class TicTacToe
 		
 	}
 	
-	public void printWinner(int count, JFrame frame) {
+	public void printWinner(int count, JFrame frame, List<Player> p) {
 		if(count % 2 == 0)
 		{
-			playerWins(frame, "Player 1 Wins");
+			playerWins(frame, p.get(0).getName().toUpperCase() + " WINS");
+			p.get(0).setScore(p.get(0).getScore() + 1);
 		}
 		else
 		{
-			playerWins(frame, "Player 2 Wins");
+			playerWins(frame, p.get(1).getName().toUpperCase() + " WINS");
+			p.get(1).setScore(p.get(1).getScore() + 1);
 		}
 	}
 	
-	//Description: prints out that player one wins
-	//PreCondition: player one wins
-	//PostCondition: prints out that player one wins at the top
+	//prints out the winner
 	public void playerWins(JFrame frame, String PLAYER_WIN)
 	{
 		JLabel playerWin = new JLabel(PLAYER_WIN);
 		frame.add(playerWin, BorderLayout.NORTH);
 	}
 	
-	public void checkForWinner(JButton[][] button, JLabel playerTurn, int count, JFrame frame) {
+	public void checkForWinner(JButton[][] button, JLabel playerTurn, int count, JFrame frame, List<Player> p) {
 		if(check_win(button))
 		{
 			//so players can't click anymore buttons when winner is announced
@@ -104,7 +106,7 @@ public class TicTacToe
 			}
 			playerTurn.setVisible(false);
 			
-			printWinner(count, frame);
+			printWinner(count, frame, p);
 			
 		}
 	}

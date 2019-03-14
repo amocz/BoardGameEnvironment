@@ -1,7 +1,9 @@
 package GameEnvironment;
 
+import java.util.ArrayList;
+
 public abstract class GameState {
-    private String[][] boardstate;
+    private ArrayList<ArrayList<Element>> boardstate = new ArrayList<ArrayList<Element>>();
     private Player playerTurn;
 
     public GameState() {
@@ -9,11 +11,11 @@ public abstract class GameState {
         this.playerTurn = null;
     }
 
-    public String[][] getBoardstate() {
+    public ArrayList<ArrayList<Element>> getBoardstate() {
         return boardstate;
     }
 
-    public void setBoardstate(String[][] boardstate) {
+    public void setBoardstate(ArrayList<ArrayList<Element>> boardstate) {
         this.boardstate = boardstate;
     }
 

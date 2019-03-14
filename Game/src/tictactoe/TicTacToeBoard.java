@@ -4,25 +4,24 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import GameEnvironment.Game;
 import GameEnvironment.Player;
 
 import javax.swing.JButton;
 import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 public class TicTacToeBoard extends JFrame implements ActionListener
 {
-	public static final String PLAYER_1 = "PLAYER 1 WON";
-	public static final String PLAYER_2 = "PLAYER 2 WON";
-	public static final String PLAYER_1_TURN = "PLAYER 1 TURN";
-	public static final String PLAYER_2_TURN = "PLAYER 2 TURN";
-	public static final String TIE = "IT'S A TIE";
-	public static final int WIDTH = 500;
-	public static final int HEIGHT = 500;
-	public static final int COLUMN = 3;
-	public static final int ROW = 3;
+	public static String PLAYER_1;
+	public static String PLAYER_2;
+	public static int WIDTH;
+	public static int HEIGHT;
+	public static int COLUMN = 3;
+	public static int ROW = 3;
+	public static List<Player> players;
 	
 	private JButton[][] button;
 	private JLabel playerTurn;
@@ -30,16 +29,18 @@ public class TicTacToeBoard extends JFrame implements ActionListener
 	//Description: set GUI related stuff
 	//PreCondition: none
 	//PostCondition: Sets size, title, JLabel, JButton, JPanel
-	public TicTacToeBoard()
+	public TicTacToeBoard(Game gb)
 	{
 		super();
+		HEIGHT = gb.getGrid().getHeight();
+		WIDTH = gb.getGrid().getWidth();
+		PLAYER_1 = gb.getPlayers().get(0).getName();
+		PLAYER_2 = gb.getPlayers().get(1).getName();
+		players = gb.getPlayers();
 		
 		this.setSize(WIDTH, HEIGHT);
 		this.setResizable(false);
-		this.setTitle("Tic Tac Toe");
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
+		this.setTitle(gb.getName());
 		
 		//top
 		setLayout(new BorderLayout());
@@ -49,8 +50,8 @@ public class TicTacToeBoard extends JFrame implements ActionListener
 		grid.setLayout(new GridLayout(COLUMN, ROW));
 		this.add(grid, BorderLayout.CENTER);
 		
-		//player turn stat
-		playerTurn =  new JLabel(PLAYER_1_TURN);
+		//player turn stats
+		playerTurn =  new JLabel(PLAYER_1.toUpperCase() + "'S TURN" );
 		add(playerTurn, BorderLayout.NORTH);
 		
 		//creates 9 buttons
@@ -79,13 +80,13 @@ public class TicTacToeBoard extends JFrame implements ActionListener
 				if(button[i][j] == e.getSource())
 				{	
 					User p = new User();
-					p.make_move(button[i][j], count, playerTurn);
+					p.make_move(button[i][j], count, playerTurn, PLAYER_1, PLAYER_2);
 				}
 			}
 		}
 		//check for winner
 		TicTacToe ttt = new TicTacToe();
-		ttt.checkForWinner(button, playerTurn, count, this);
+		ttt.checkForWinner(button, playerTurn, count, this, players);
 
 		//check for tie
 		ttt.checkForTie(playerTurn, this, count, button);

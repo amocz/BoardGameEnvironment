@@ -1,12 +1,17 @@
 package GameEnvironment;
 
-public abstract class Grid {
+public class Grid {
     private int height;
     private int width;
 
     public Grid() {
         this.height = 0;
         this.width = 0;
+    }
+    
+    public Grid(int height, int width) {
+    	this.height = height;
+    	this.width = width;
     }
 
     public int getHeight() {
