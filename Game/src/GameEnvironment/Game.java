@@ -2,16 +2,14 @@ package GameEnvironment;
 
 import java.util.List;
 
-public class Game {
+public abstract class Game {
 
 	private String name;
 	private List<Player> players;
-	private Grid grid;
 	
-	public Game(String name, List<Player> players, Grid grid){
+	public Game(String name, List<Player> players){
 		this.name = name;
 		this.players = players;
-		this.grid = grid;
 	}
 	
     public String getName() {
@@ -30,11 +28,4 @@ public class Game {
         this.players = players;
     }
     
-    public Grid getGrid() {
-        return grid;
-    }
-
-    public void setGrid(Grid grid) {
-        this.grid = grid;
-    }
 }

@@ -127,7 +127,7 @@ public class GUI extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e){
 		if(TTTbutton == e.getSource())
 		{
-			TicTacToeBoard t = new TicTacToeBoard(new Game("Tic Tac Toe", players, new Grid(500,500)));
+			TicTacToeBoard t = new TicTacToeBoard(players);
 		}
 		else if(BSbutton == e.getSource())
 		{

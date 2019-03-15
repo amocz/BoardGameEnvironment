@@ -13,7 +13,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
-public class TicTacToeBoard implements ActionListener
+public class TicTacToeBoard extends Game implements ActionListener
 {
 	public static String PLAYER_1;
 	public static String PLAYER_2;
@@ -30,18 +30,19 @@ public class TicTacToeBoard implements ActionListener
 	//Description: set GUI related stuff
 	//PreCondition: none
 	//PostCondition: Sets size, title, JLabel, JButton, JPanel
-	public TicTacToeBoard(Game gb)
+	public TicTacToeBoard(List<Player> player)
 	{
+		super("Tic Tac Toe", player);
 		frame = new JFrame();
-		HEIGHT = gb.getGrid().getHeight();
-		WIDTH = gb.getGrid().getWidth();
-		PLAYER_1 = gb.getPlayers().get(0).getName();
-		PLAYER_2 = gb.getPlayers().get(1).getName();
-		players = gb.getPlayers();
+		HEIGHT = 500;
+		WIDTH = 500;
+		PLAYER_1 = player.get(0).getName();
+		PLAYER_2 = player.get(1).getName();
+		players = player;
 		
 		frame.setSize(WIDTH, HEIGHT);
 		frame.setResizable(false);
-		frame.setTitle(gb.getName());
+		frame.setTitle("Tic Tac Toe");
 		frame.setVisible(true);
 		
 		//top
