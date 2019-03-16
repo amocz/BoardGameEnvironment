@@ -19,8 +19,6 @@ import javax.swing.border.EmptyBorder;
 
 import tictactoe.TicTacToeBoard;
 
-//import tictactoe.TicTacToe;
-
 import java.awt.Insets;
 import java.awt.Dimension;
 import java.awt.Component;
@@ -44,6 +42,8 @@ public class GUI extends JFrame implements ActionListener
 		this.setResizable(false);
 		this.setTitle("Game Environment");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+
 			
 		panel = new JPanel();
 		
@@ -127,7 +127,7 @@ public class GUI extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e){
 		if(TTTbutton == e.getSource())
 		{
-			TicTacToeBoard t = new TicTacToeBoard(players);
+			new TicTacToeBoard(players);
 		}
 		else if(BSbutton == e.getSource())
 		{

@@ -121,23 +121,23 @@ public class TicTacToe
 		}
 	}
 	
-	public void make_move(JButton button, int count, JLabel playerTurn, String p1, String p2) {
-		TicTacToeElement element = new TicTacToeElement();
-		
-		
-		if(count % 2 == 0) {
-			button.setText(element.getName1());
-			playerTurn.setText(p2.toUpperCase() + "'S TURN");
-			//System.out.println("P2: " + p2);
-			//System.out.println(playerTurn.getText());
+	public void make_move(JButton button, TicTacToeGameState gamestate, JLabel playerTurn, Player p1, Player p2) {
+		TicTacToeElement elementX = new TicTacToeElement("X");
+		TicTacToeElement elementO = new TicTacToeElement("O");
+
+		if(gamestate.getPlayerTurn() == p1) {
+			button.setText(elementX.getName());
+			playerTurn.setText(p2.getName().toUpperCase() + "'S TURN");
+			gamestate.setPlayerTurn(p2);
 		}
 		else {
-			button.setText(element.getName2());
-			playerTurn.setText(p1.toUpperCase() + "'S TURN");
+			button.setText(elementO.getName());
+			playerTurn.setText(p1.getName().toUpperCase() + "'S TURN");
+			gamestate.setPlayerTurn(p1);
+
 		}
 		
 		button.setFont(new Font("Arial", Font.BOLD,75));
-		//button[i].setForeground(Color.RED);
 
 		button.setEnabled(false);
 		
@@ -146,5 +146,3 @@ public class TicTacToe
 	
 	
 }
-
-
