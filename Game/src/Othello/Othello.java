@@ -1,10 +1,11 @@
 package Othello;
-import GameEnvironment.Game;
 
 import java.util.ArrayList;
 
 public class Othello {
     private ArrayList<OthelloGameState> gameState;
+    public static String PLAYER_1;
+    public static String PLAYER_2;
     private int width;
     private int height;
 
@@ -15,7 +16,8 @@ public class Othello {
     }
 
     public void makeNewGame() {
-        gameState.add(new OthelloGameState(new GameBoard(width, height)));
+
+        gameState.add(new OthelloGameState(new OthelloGameBoard(width, height)));
     }
 
     public String determineWinner(OthelloGameState gameState) {

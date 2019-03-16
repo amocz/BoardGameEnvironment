@@ -8,6 +8,11 @@ public abstract class Element {
         this.piecename = "";
     }
 
+    public Element(String piecename)
+    {
+        this.piecename = piecename;
+    }
+
     public String getPiecename() {
         return piecename;
     }
