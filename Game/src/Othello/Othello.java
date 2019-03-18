@@ -1,13 +1,14 @@
 package Othello;
 
 import GameEnvironment.GameState;
+import java.util.Scanner;
 
 import java.util.ArrayList;
 
 public class Othello {
     private ArrayList<OthelloGameState> gameState;
-    public static String PLAYER_1 = "BLACK";
-    public static String PLAYER_2 = "WHITE";
+    public static String PLAYER_1 = "WHITE";
+    public static String PLAYER_2 = "BLACK";
     private int width;
     private int height;
 
@@ -36,9 +37,36 @@ public class Othello {
     public static void main(String args[]) {
         Othello game = new Othello(8, 8);
         OthelloGameState currentGameState = game.gameState.get(game.gameState.size() - 1);
-        if(!game.isGameOver()) {
-            currentGameState.getGameBoard().print();
+        Scanner reader = new Scanner(System.in);
+        
+        System.out.println(currentGameState.getPlayerTurn() + "'s TURN!");
+        System.out.println("WHITE: " + currentGameState.getWhiteScore() + "\tBLACK: " + currentGameState.getBlackScore());
+    	currentGameState.getGameBoard().print();
+    	
+        while (!game.isGameOver()) {
+            System.out.println("Enter an x coordinate for the move: ");
+            int x = reader.nextInt();
+            System.out.println("Enter a y coordinate for the move: ");
+            int y = reader.nextInt();
+            
+            System.out.println(currentGameState.getPlayerTurn() + "'s TURN!");
+            System.out.println("WHITE: " + currentGameState.getWhiteScore() + "\tBLACK: " + currentGameState.getBlackScore());
+        	currentGameState.getGameBoard().print();
+            
+            currentGameState.makeMove(x, y);
+            currentGameState.checkScore();
+            currentGameState.checkGameOver();
         }
+        
+        String winner = game.determineWinner(currentGameState);
+        if (winner.equals("TIE")) {
+        	System.out.println("IT'S A " + winner);
+        }
+        else {
+        	System.out.println(winner + " WINS!");
+        }
+        
+        reader.close();
     }
 }
 

@@ -1,10 +1,10 @@
 package Othello;
 
 import GameEnvironment.Cell;
+import java.util.ArrayList;
 
 public class OthelloCell{
-    private int xCoord;
-    private int yCoord;
+    private int xCoord, yCoord;
     private Disk disk;
 
     public OthelloCell(int xCoord, int yCoord, Disk disk){
@@ -24,58 +24,28 @@ public class OthelloCell{
     public Disk getDisk(){
         return disk;
     }
-
+    
     public void setDisk(Disk disk){
         this.disk = disk;
     }
 
     public boolean isEmpty() {
-        if(disk == Disk.EMPTY)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return disk == Disk.EMPTY;
     }
 
     public boolean isWhite() {
-        if(disk == Disk.WHITE)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return disk == Disk.WHITE;
     }
 
     public boolean isBlack() {
-        if(disk == Disk.BLACK)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return disk == Disk.BLACK;
     }
 
     public String toString()
     {
-        if(disk == Disk.EMPTY)
-        {
-            return "0";
-        }
-        if(disk == Disk.BLACK)
-        {
-            return "1";
-        }
-        else
-        {
-            return "2";
-        }
-
+        if (disk == Disk.EMPTY) return "0";
+        if (disk == Disk.WHITE) return "1";
+        return "2";
     }
+
 }
