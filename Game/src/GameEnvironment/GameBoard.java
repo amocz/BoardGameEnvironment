@@ -10,17 +10,16 @@ public abstract class GameBoard<T extends Cell> {
 
     public GameBoard()
     {
-        this.board = makeEmptyBoard();
         this.width = 0;
         this.height = 0;
+        board = new ArrayList<ArrayList<T>>();
     }
 
-    public GameBoard(int width, int height) {
-        this.board = makeEmptyBoard();
+    public GameBoard ( int width, int height) {
         this.width = width;
         this.height = height;
+        board = new ArrayList<ArrayList<T>>();
     }
-
     // width() returns the width of this Othello board.
     public ArrayList<ArrayList<T>> getBoard() {
         return board;
@@ -36,6 +35,11 @@ public abstract class GameBoard<T extends Cell> {
         return height;
     }
 
+    public void setBoard(ArrayList<ArrayList<T>> board)
+    {
+        this.board = board;
+    }
+
     // isValidCell() returns true if the given (x, y) is a valid
     // cell on this board -- i.e., if (x, y) is in the boundaries
     // of the board -- or false otherwise.
@@ -48,7 +52,5 @@ public abstract class GameBoard<T extends Cell> {
 
     // getCell() returns the contents of the cell (x, y).
     public abstract T getCell(int x, int y);
-
-    public abstract ArrayList<ArrayList<T>> makeEmptyBoard();
 
 }

@@ -3,25 +3,43 @@ import GameEnvironment.Cell;
 import GameEnvironment.Element;
 import GameEnvironment.GameBoard;
 
-import java.util.ArrayList;
+import java.util.*;
 
-public class OthelloGameBoard extends GameBoard<OthelloCell> {
+public class OthelloGameBoard {
+
+    private int width;
+    private int height;
+    private ArrayList<ArrayList<OthelloCell>> board;
 
     public OthelloGameBoard(int width, int height) {
-        super(width,height);
+
+        this.width = width;
+        this.height = height;
+
+        makeEmptyBoard();
+
     }
 
-    // width() returns the width of this Othello board.
-    public ArrayList<ArrayList<OthelloCell>> getBoard() {return getBoard();
-    }
-    
-    // width() returns the width of this Othello board.
-    public int getWidth() { return getWidth();
+    public OthelloGameBoard(OthelloGameBoard current)
+    {
+        board = current.getBoard();
+        width = current.getWidth();
+        height = current.getHeight();
     }
 
-    // height() returns the height of this Othello board.
-    public int getHeight() {
-        return getHeight();
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public int getHeight()
+    {
+        return height;
+    }
+
+    public ArrayList<ArrayList<OthelloCell>> getBoard()
+    {
+        return board;
     }
 
     // isValidCell() returns true if the given (x, y) is a valid
@@ -43,7 +61,7 @@ public class OthelloGameBoard extends GameBoard<OthelloCell> {
     }
 
     public void setCell(int x, int y, Disk disk) {
-        getBoard().get(x).set(y,new OthelloCell(x,y,disk));
+        getBoard().get(x).set(y, new OthelloCell(x,y,disk));
     }
 
     // placeDisk() places a disk on the board in othelloCell (x, y),
@@ -58,24 +76,49 @@ public class OthelloGameBoard extends GameBoard<OthelloCell> {
     // if any -- so, if it was white, it is now black; if it
     // was black, it is now white.
     public void flipDisk(int x, int y) {
-    	if (getCell(x, y).isWhite()) {
+        if (getCell(x, y).isWhite()) {
             setCell(x, y, Disk.BLACK);
         }
 
-    	if (getCell(x, y).isBlack()) {
+        if (getCell(x, y).isBlack()) {
             setCell(x, y, Disk.WHITE);
         }
     }
 
-    public ArrayList<ArrayList<OthelloCell>> makeEmptyBoard() {
-        ArrayList<ArrayList<OthelloCell>> board = new ArrayList<ArrayList<OthelloCell>>();
+    public void makeEmptyBoard()
+    {
+        this.board = new ArrayList<ArrayList<OthelloCell>>();
 
-        for (int i = 0; i < getWidth(); i++) {
-            for (int j = 0; j < getHeight(); j++) {
-                setCell(i,j,Disk.EMPTY);
+        for(int i = 0; i < width; i++)
+        {
+            ArrayList<OthelloCell> list = new ArrayList<OthelloCell>();
+            board.add(list);
+        }
+
+        for(int i = 0; i < width; i++)
+        {
+            for(int j = 0; j < height; j++)
+            {
+                board.get(i).add(new OthelloCell(i,j,Disk.EMPTY));
             }
         }
-        return board;
+
+        setCell(3,3,Disk.WHITE);
+        setCell(3,4,Disk.BLACK);
+        setCell(4,3,Disk.BLACK);
+        setCell(4,4,Disk.WHITE);
+
     }
 
+    public void print()
+    {
+        for(int i = 0; i < width; i++)
+        {
+            for(int j = 0; j < height; j++)
+            {
+                System.out.print(getCell(i,j).toString());
+            }
+            System.out.println("");
+        }
+    }
 }

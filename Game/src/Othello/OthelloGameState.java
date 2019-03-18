@@ -3,7 +3,7 @@ import GameEnvironment.GameState;
 
 import java.util.ArrayList;
 
-public class OthelloGameState extends GameState {
+public class OthelloGameState {
 
     private OthelloGameBoard gameBoard;
     private int blackScore, whiteScore;
@@ -17,6 +17,16 @@ public class OthelloGameState extends GameState {
         this.gameOver = false;
         this.playerTurn = Othello.PLAYER_1;
     }
+
+    public OthelloGameState(OthelloGameBoard gameBoard, int blackScore, int whiteScore, boolean gameOver, String playerTurn) {
+        this.gameBoard = gameBoard;
+        this.blackScore = blackScore;
+        this.whiteScore = whiteScore;
+        this.gameOver = gameOver;
+        this.playerTurn = playerTurn;
+    }
+
+
 
     // getGameBoard() returns a reference to a constant OthelloBoard describing
     // what's on the board in this game state.
@@ -32,12 +42,6 @@ public class OthelloGameState extends GameState {
     // getWhiteScore() returns the white player's current score.
     public int getWhiteScore() {
        return whiteScore;
-    }
-
-    // isGameOver() returns true if the game is over in this game state,
-    // false otherwise.
-    public boolean isGameOver() { //IMPLEMENT
-        return gameOver;
     }
 
     // isBlackTurn() returns true if it is currently the black player's
@@ -105,6 +109,12 @@ public class OthelloGameState extends GameState {
 
 
 
+    }
+
+    // isGameOver() returns true if the game is over in this game state,
+    // false otherwise.
+    public boolean isGameOver() { //IMPLEMENT
+        return gameOver;
     }
     
     // checkGameOver() modifies and sets gameOver attribute to true if

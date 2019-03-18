@@ -2,12 +2,23 @@ package Othello;
 
 import GameEnvironment.Cell;
 
-public class OthelloCell extends Cell{
+public class OthelloCell{
+    private int xCoord;
+    private int yCoord;
     private Disk disk;
 
     public OthelloCell(int xCoord, int yCoord, Disk disk){
-        super(xCoord,yCoord);
+        this.xCoord = xCoord;
+        this.yCoord = yCoord;
         this.disk = disk;
+    }
+
+    public int getxCoord() {
+        return xCoord;
+    }
+
+    public int getyCoord() {
+        return yCoord;
     }
 
     public Disk getDisk(){
@@ -49,5 +60,22 @@ public class OthelloCell extends Cell{
         {
             return false;
         }
+    }
+
+    public String toString()
+    {
+        if(disk == Disk.EMPTY)
+        {
+            return "0";
+        }
+        if(disk == Disk.BLACK)
+        {
+            return "1";
+        }
+        else
+        {
+            return "2";
+        }
+
     }
 }
