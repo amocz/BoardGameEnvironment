@@ -114,5 +114,6 @@ public class OthelloGameBoard {
             }
             System.out.println("");
         }
+        System.out.println("");
     }
 }

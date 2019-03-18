@@ -52,6 +52,17 @@ public class OthelloGameState {
     			if (cell.isWhite()) whiteScore++;
     		}
     }
+
+    public String changePlayer()
+    {
+        if(isBlackTurn()) {
+            return Othello.PLAYER_2;
+        }
+        else
+        {
+            return Othello.PLAYER_1;
+        }
+    }
     
     // isBlackTurn() returns true if it is currently the black player's
     // turn in this game state, false otherwise.
