@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.Icon;
 import javax.swing.border.EmptyBorder;
 
+import Memory.MemoryGUI;
 import tictactoe.TicTacToeBoard;
 
 import java.awt.Insets;
@@ -134,6 +135,7 @@ public class GUI extends JFrame implements ActionListener
 		}
 		else if(Mbutton == e.getSource())
 		{
+		    new MemoryGUI(players);
 		}
 		else if(Obutton == e.getSource())
 		{
