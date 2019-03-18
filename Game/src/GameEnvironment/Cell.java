@@ -1,8 +1,8 @@
 package GameEnvironment;
 
 public abstract class Cell {
-    private int xCoord;
-    private int yCoord;
+    protected int xCoord;
+    protected int yCoord;
 
     public Cell(int xCoord, int yCoord) {
         this.xCoord = xCoord;
