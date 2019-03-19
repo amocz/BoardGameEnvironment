@@ -1,4 +1,5 @@
 package OthelloGui;
+import GameEnvironment.Player;
 import Othello.Othello;
 import Othello.OthelloGameBoard;
 import Othello.OthelloGameState;
@@ -6,6 +7,7 @@ import Othello.Disk;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.ImageIcon;
 
@@ -18,17 +20,13 @@ public class OthelloGui extends JFrame {
     private JLabel blackScore;
     private JLabel whiteScore;
     private JLabel playerTurn;
+    private static List<Player> players;
 
-    public OthelloGui(Othello game, OthelloGameState currentGameState) {
-        this.game = game;
-        this.currentGameState = currentGameState;
-        this.setBoard(currentGameState.getGameBoard());
-        initialize();
-        this.setVisible(true);
-    }
+    public OthelloGui(List<Player> players) {
 
-    public OthelloGui(OthelloGameState gs) {
-        this.setBoard(gs.getGameBoard());
+        game = new Othello(8, 8, players);
+        currentGameState = game.getGameStates().get(game.getGameStates().size() - 1);
+        setBoard(currentGameState.getGameBoard());
         initialize();
         this.setVisible(true);
     }
@@ -77,7 +75,7 @@ public class OthelloGui extends JFrame {
                     {
                         if (game.getCurrentGameState().isValidMove(y, x)) {
                             game.getCurrentGameState().makeMove(y, x);
-                            game.getCurrentGameState().getGameBoard().print();
+                            //game.getCurrentGameState().getGameBoard().print();
                             update();
                         }
                     }
@@ -129,7 +127,6 @@ public class OthelloGui extends JFrame {
         setSize(600, 600);
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void update()
@@ -157,10 +154,11 @@ public class OthelloGui extends JFrame {
         blackScore.setText("Black's Score: " + Integer.toString(currentGameState.getBlackScore()) + "  | ");
         whiteScore.setText("White's Score: " + Integer.toString(currentGameState.getWhiteScore()) + "  |");
     }
-
+/**
     public static void main(String[] args) {
         Othello game = new Othello(8, 8);
         OthelloGameState currentGameState = game.getGameStates().get(game.getGameStates().size() - 1);
         OthelloGui othello = new OthelloGui(game,currentGameState);
     }
+ */
 }

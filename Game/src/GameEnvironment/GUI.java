@@ -23,6 +23,7 @@ import javax.swing.Icon;
 import javax.swing.border.EmptyBorder;
 
 import Memory.MemoryGUI;
+import OthelloGui.OthelloGui;
 import tictactoe.TicTacToeBoard;
 
 import java.awt.Insets;
@@ -206,6 +207,7 @@ public class GUI extends JFrame implements ActionListener
 		}
 		else if(Obutton == e.getSource())
 		{
+			new OthelloGui(players);
 		}
 		else if(playerProfile == e.getSource()) {
 			int overallp1Score =0;
@@ -233,9 +235,6 @@ public class GUI extends JFrame implements ActionListener
 				    JOptionPane.PLAIN_MESSAGE);
 
 		}
-		
 	}
-	
-
 }
 

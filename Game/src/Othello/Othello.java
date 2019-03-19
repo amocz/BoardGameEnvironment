@@ -1,21 +1,28 @@
 package Othello;
 
 import GameEnvironment.GameState;
+import GameEnvironment.Player;
+
+import java.util.List;
 import java.util.Scanner;
 
 import java.util.ArrayList;
 
 public class Othello {
     private ArrayList<OthelloGameState> gameState;
-    public static String PLAYER_1 = "WHITE";
-    public static String PLAYER_2 = "BLACK";
+    public static String PLAYER_1;
+    public static String PLAYER_2;
+    private static List<Player> players;
     private int width;
     private int height;
 
-    public Othello(int width, int height) {
+    public Othello(int width, int height, List<Player> players) {
         gameState = new ArrayList<OthelloGameState>();
         this.width = width;
         this.height = height;
+        this.players = players;
+        PLAYER_1 = players.get(0).getName() + " (WHITE)";
+        PLAYER_2 = players.get(1).getName() + " (BLACK)";
         makeNewGame();
     }
 
@@ -44,7 +51,7 @@ public class Othello {
         return gameState.get(gameState.size() - 1).isGameOver();
     }
 
-
+/**
     public static void main(String args[]) {
         Othello game = new Othello(8, 8);
         OthelloGameState currentGameState = game.gameState.get(game.gameState.size() - 1);
@@ -79,6 +86,6 @@ public class Othello {
         
         reader.close();
     }
-
+*/
 }
 
