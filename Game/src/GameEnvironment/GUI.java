@@ -7,6 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -34,11 +39,14 @@ public class GUI extends JFrame implements ActionListener
 	private JPanel panel;
 	private Player p1, p2;
 	List<Player> players = new ArrayList<Player>();
+	ArrayList<String> logPlayer = new ArrayList<String>();
+	
 	
 	//Description: set GUI related stuff
-	public GUI()
+	public GUI(ArrayList<String> logPlayer)
 	{
 		super();
+		this.logPlayer = logPlayer;
 		this.setSize(500, 500);
 		this.setResizable(false);
 		this.setTitle("Game Environment");
@@ -100,6 +108,14 @@ public class GUI extends JFrame implements ActionListener
 		playerProfile.addActionListener(this);
 		
 		inputPlayerName(panel);
+		
+		this.addWindowListener( new WindowAdapter()
+		 {
+		   public void windowClosing(WindowEvent e)
+		    {
+			   updateLogToFile();  
+		    }
+		  });
 
 	}
 	
@@ -122,8 +138,59 @@ public class GUI extends JFrame implements ActionListener
          p2 = new Player(p2username.getText());
          players.add(p1);
          players.add(p2);
+         addPlayerToLog(p1username.getText());
+         addPlayerToLog(p2username.getText());
+
       }
     }
+  
+  	public void addPlayerToLog(String pname) {
+  		boolean isNameFound = false;
+  		for(int i = 0; i< logPlayer.size(); i++) {
+  			String name = logPlayer.get(i).substring( 0, logPlayer.get(i).indexOf(","));
+  			if(name.equals(pname)) {
+  				isNameFound = true;
+  			}
+  		}
+  		if(!isNameFound) {
+  			logPlayer.add(pname + ",0");
+  		}
+  	}
+  	
+  	public void updateLogToFile() {
+  		
+  		int overallp1Score =0;
+		int overallp2Score=0;
+		for(int i = 0; i< logPlayer.size(); i++) {
+  			String name = logPlayer.get(i).substring( 0, logPlayer.get(i).indexOf(","));
+  			if(name.equals(p1.getName())) {
+  				overallp1Score = Integer.parseInt(logPlayer.get(i).substring(logPlayer.get(i).indexOf(",") + 1));
+  				overallp1Score = overallp1Score + p1.getScore();
+  				logPlayer.set(i, name + "," + Integer.toString(overallp1Score));
+  			}
+  			if(name.equals(p2.getName())) {
+  				overallp2Score = Integer.parseInt(logPlayer.get(i).substring(logPlayer.get(i).indexOf(",") + 1));
+  				overallp2Score = overallp2Score + p2.getScore();
+  				logPlayer.set(i, name + "," + Integer.toString(overallp2Score));
+
+  			}
+  		}
+		
+		try {
+			FileWriter fw = new FileWriter("gameLog.txt");
+			Writer output = new BufferedWriter(fw);
+			for(int i = 0; i < logPlayer.size(); i++) {
+				output.write(logPlayer.get(i) + "\n");
+				if(i == logPlayer.size()) {
+					output.write(System.getProperty( "line.separator" ));
+				}
+			}
+			output.close();
+		}catch(Exception e){
+			System.out.println("exception caught");
+		}
+  	}
+
 		
 	public void actionPerformed(ActionEvent e){
 		if(TTTbutton == e.getSource())
@@ -141,10 +208,24 @@ public class GUI extends JFrame implements ActionListener
 		{
 		}
 		else if(playerProfile == e.getSource()) {
+			int overallp1Score =0;
+			int overallp2Score=0;
+			for(int i = 0; i< logPlayer.size(); i++) {
+	  			String name = logPlayer.get(i).substring( 0, logPlayer.get(i).indexOf(","));
+	  			if(name.equals(p1.getName())) {
+	  				overallp1Score = Integer.parseInt(logPlayer.get(i).substring(logPlayer.get(i).indexOf(",") + 1));
+	  			}
+	  			if(name.equals(p2.getName())) {
+	  				overallp2Score = Integer.parseInt(logPlayer.get(i).substring(logPlayer.get(i).indexOf(",") + 1));
+	  			}
+	  		}
+	  		
 			String message = "Player 1: " + p1.getName() + 
-					"\nPlayer 1 Score: " + p1.getScore() +
+					"\nPlayer 1 Score(Now): " + p1.getScore() +
+					"\nPlayer 1 Overall Score(Saved): " + overallp1Score + 
 					"\n\nPlayer 2:" + p2.getName() +
-					"\nPlayer 2 Score: " + p2.getScore();
+					"\nPlayer 2 Score(Now): " + p2.getScore() + 
+					"\nPlayer 2 Overall Score(Saved): " + overallp2Score;
 					
 			JOptionPane.showMessageDialog(panel,
 				    message,

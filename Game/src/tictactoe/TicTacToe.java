@@ -1,6 +1,7 @@
 package tictactoe;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
 
@@ -22,18 +23,27 @@ public class TicTacToe
 				&& button[0][1].getText().equals(button[0][2].getText()) 
 				&& button[0][0].getText().equals("")==false)
 		{
+			button[0][0].setBackground(Color.RED);
+			button[0][1].setBackground(Color.RED);
+			button[0][2].setBackground(Color.RED);
 			return true;
 		}
 		else if(button[1][0].getText().equals(button[1][1].getText()) 
 				&& button[1][1].getText().equals(button[1][2].getText()) 
 				&& button[1][0].getText().equals("")==false)
 		{
+			button[1][0].setBackground(Color.RED);
+			button[1][1].setBackground(Color.RED);
+			button[1][2].setBackground(Color.RED);
 			return true;
 		}
 		else if(button[2][0].getText().equals(button[2][1].getText()) 
 				&& button[2][1].getText().equals(button[2][2].getText()) 
 				&& button[2][0].getText().equals("")==false)
 		{
+			button[2][0].setBackground(Color.RED);
+			button[2][1].setBackground(Color.RED);
+			button[2][2].setBackground(Color.RED);
 			return true;
 		}
 		//checks vertical win
@@ -41,18 +51,27 @@ public class TicTacToe
 				&& button[1][0].getText().equals(button[2][0].getText()) 
 				&& button[0][0].getText().equals("")==false)
 		{
+			button[0][0].setBackground(Color.RED);
+			button[1][0].setBackground(Color.RED);
+			button[2][0].setBackground(Color.RED);
 			return true;
 		}
 		else if(button[0][1].getText().equals(button[1][1].getText()) 
 				&& button[1][1].getText().equals(button[2][1].getText()) 
 				&& button[0][1].getText().equals("")==false)
 		{
+			button[0][1].setBackground(Color.RED);
+			button[1][1].setBackground(Color.RED);
+			button[2][1].setBackground(Color.RED);
 			return true;
 		}
 		else if(button[0][2].getText().equals(button[1][2].getText()) 
 				&& button[1][2].getText().equals(button[2][2].getText()) 
 				&& button[0][2].getText().equals("")==false)
 		{
+			button[0][2].setBackground(Color.RED);
+			button[1][2].setBackground(Color.RED);
+			button[2][2].setBackground(Color.RED);
 			return true;
 		}
 		//checks diagonal wins
@@ -60,12 +79,18 @@ public class TicTacToe
 				&& button[1][1].getText().equals(button[2][2].getText()) 
 				&& button[0][0].getText().equals("")==false)
 		{
+			button[0][0].setBackground(Color.RED);
+			button[1][1].setBackground(Color.RED);
+			button[2][2].setBackground(Color.RED);
 			return true;
 		}
 		else if(button[0][2].getText().equals(button[1][1].getText()) 
 				&& button[1][1].getText().equals(button[2][0].getText()) 
 				&& button[0][2].getText().equals("")==false)
 		{
+			button[0][2].setBackground(Color.RED);
+			button[1][1].setBackground(Color.RED);
+			button[2][0].setBackground(Color.RED);
 			return true;
 		}
 
