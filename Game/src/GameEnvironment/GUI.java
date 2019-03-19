@@ -24,6 +24,7 @@ import javax.swing.border.EmptyBorder;
 
 import Memory.MemoryGUI;
 import OthelloGui.OthelloGui;
+import battleship.BattleShip;
 import tictactoe.TicTacToeBoard;
 
 import java.awt.Insets;

@@ -111,7 +111,7 @@ public class BattleshipBoard extends JFrame {
         this.add(verticalBox);       
         this.pack();
         this.setVisible(show);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void showScreen(){

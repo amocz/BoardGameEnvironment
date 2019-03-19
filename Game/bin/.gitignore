@@ -1,5 +1,8 @@
+/.classpath
+/.project
 /GameEnvironment/
-/Othello/
-/tictactoe/
 /Memory/
+/Othello/
 /OthelloGui/
+/battleship/
+/tictactoe/
