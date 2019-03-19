@@ -3,11 +3,9 @@ import Othello.Othello;
 import Othello.OthelloGameBoard;
 import Othello.OthelloGameState;
 import Othello.Disk;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.*;
 import javax.swing.ImageIcon;
 
@@ -16,11 +14,14 @@ public class OthelloGui extends JFrame {
     private JPanel menu;
     private OthelloGameBoard board;
     private Othello game;
+    private OthelloGameState currentGameState;
     private JLabel blackScore;
     private JLabel whiteScore;
+    private JLabel playerTurn;
 
     public OthelloGui(Othello game, OthelloGameState currentGameState) {
         this.game = game;
+        this.currentGameState = currentGameState;
         this.setBoard(currentGameState.getGameBoard());
         initialize();
         this.setVisible(true);
@@ -50,14 +51,14 @@ public class OthelloGui extends JFrame {
                 cell.setBackground(new Color(0, 153, 0));
                 cell.setBorder(BorderFactory.createLineBorder(Color.gray.darker().darker()));
 
-                ImageIcon black = new ImageIcon(getClass().getResource("../OthelloGui/black.png"));
-                ImageIcon white = new ImageIcon(getClass().getResource("../OthelloGui/white.png"));
+                ImageIcon black = new ImageIcon(getClass().getResource("../OthelloGui/BLACK.png"));
+                ImageIcon white = new ImageIcon(getClass().getResource("../OthelloGui/WHITE.png"));
 
-                if(game.getCurrentGameState().getGameBoard().getCell(i,j).getDisk() == Disk.BLACK){
+                if(currentGameState.getGameBoard().getCell(i,j).getDisk() == Disk.BLACK){
                     JLabel disk = new JLabel(black);
                     cell.add(disk);
                 }
-                if(game.getCurrentGameState().getGameBoard().getCell(i,j).getDisk() == Disk.WHITE){
+                if(currentGameState.getGameBoard().getCell(i,j).getDisk() == Disk.WHITE){
                     JLabel disk = new JLabel(white);
                     cell.add(disk);
                 }
@@ -68,20 +69,35 @@ public class OthelloGui extends JFrame {
 
             panel.addMouseListener(new MouseListener() {
                 public void mouseClicked (MouseEvent e){
-                    int i = e.getY() / 74;
-                    int j = e.getX() / 74;
+                    int x = e.getX() / 74;
+                    int y = e.getY() / 74;
 
-                    if (game.getCurrentGameState().isValidMove(i, j)) {
-                        game.getCurrentGameState().makeMove(i, j);
-                        game.getCurrentGameState().getGameBoard().print();
-                        ImageIcon picture = new ImageIcon(getClass().getResource("../OthelloGui/" + game.getCurrentGameState().getPlayerTurn() +".png"));
-                        JLabel disk = new JLabel(picture);
-                        JPanel boardPanel = (JPanel) panel.getComponent((i * 8) + j);
-                        boardPanel.add(disk);
 
-                        blackScore.setText("Black Score: " + Integer.toString(game.getCurrentGameState().getBlackScore()) + "  | ");
-                        whiteScore.setText("White Score: " + Integer.toString(game.getCurrentGameState().getWhiteScore()));
-                        game.getGameStates().add(new OthelloGameState(game.getCurrentGameState().getGameBoard(), game.getCurrentGameState().getBlackScore(), game.getCurrentGameState().getWhiteScore(), game.getCurrentGameState().isGameOver(), game.getCurrentGameState().changePlayer()));
+                    if(!game.isGameOver())
+                    {
+                        if (game.getCurrentGameState().isValidMove(y, x)) {
+                            game.getCurrentGameState().makeMove(y, x);
+                            game.getCurrentGameState().getGameBoard().print();
+                            update();
+                        }
+                    }
+                    else
+                    {
+                        if(game.determineWinner(currentGameState).equals("TIE"))
+                        {
+                            JOptionPane.showMessageDialog(null, "It's a TIE!");
+                            System.exit(0);
+                        }
+                        if(game.determineWinner(currentGameState).equals("BLACK"))
+                        {
+                            JOptionPane.showMessageDialog(null, "BLACK WINS");
+                            System.exit(0);
+                        }
+                        if(game.determineWinner(currentGameState).equals("WHITE"))
+                        {
+                            JOptionPane.showMessageDialog(null, "WHITE WINS");
+                            System.exit(0);
+                        }
                     }
                 }
                 public void mousePressed (MouseEvent e){
@@ -95,11 +111,16 @@ public class OthelloGui extends JFrame {
             });
         }
         menu = new JPanel(new FlowLayout());
-        blackScore = new JLabel("Black Score: " + Integer.toString(game.getCurrentGameState().getBlackScore()) + "  | ");
-        whiteScore = new JLabel("White Score: " + Integer.toString(game.getCurrentGameState().getWhiteScore()));
+        JPanel turnPanel = new JPanel(new FlowLayout());
 
+        playerTurn = new JLabel(("Turn: " + currentGameState.getPlayerTurn()));
+        blackScore = new JLabel("Black's Score: " + Integer.toString(currentGameState.getBlackScore()) + "  | ");
+        whiteScore = new JLabel("White's Score: " + Integer.toString(currentGameState.getWhiteScore()) + "  |");
+
+        turnPanel.add(playerTurn);
         menu.add(blackScore);
         menu.add(whiteScore);
+        menu.add(turnPanel);
 
         add(panel, BorderLayout.CENTER);
         add(menu, BorderLayout.SOUTH);
@@ -109,12 +130,37 @@ public class OthelloGui extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
 
+    public void update()
+    {
+        ImageIcon black = new ImageIcon(getClass().getResource("../OthelloGui/BLACK.png"));
+        ImageIcon white = new ImageIcon(getClass().getResource("../OthelloGui/WHITE.png"));
+
+        for (int i = 0; i < board.getWidth(); i++) {
+            for (int j = 0; j < board.getHeight(); j++) {
+                JPanel tiles = (JPanel) panel.getComponent((i * 8) + j);
+
+                tiles.removeAll();
+
+                if (currentGameState.getGameBoard().getCell(i, j).getDisk() == Disk.BLACK) {
+                    JLabel disk = new JLabel(black);
+                    tiles.add(disk);
+                }
+                if (currentGameState.getGameBoard().getCell(i, j).getDisk() == Disk.WHITE) {
+                    JLabel disk = new JLabel(white);
+                    tiles.add(disk);
+                }
+            }
+        }
+        playerTurn.setText("Turn: " + currentGameState.getPlayerTurn());
+        blackScore.setText("Black's Score: " + Integer.toString(currentGameState.getBlackScore()) + "  | ");
+        whiteScore.setText("White's Score: " + Integer.toString(currentGameState.getWhiteScore()) + "  |");
     }
 
     public static void main(String[] args) {
         Othello game = new Othello(8, 8);
-        OthelloGameState currentGameState = game.getCurrentGameState();
-        OthelloGui q = new OthelloGui(game,currentGameState);
+        OthelloGameState currentGameState = game.getGameStates().get(game.getGameStates().size() - 1);
+        OthelloGui othello = new OthelloGui(game,currentGameState);
     }
 }

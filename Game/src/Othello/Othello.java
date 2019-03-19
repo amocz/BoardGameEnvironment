@@ -44,7 +44,7 @@ public class Othello {
         return gameState.get(gameState.size() - 1).isGameOver();
     }
 
-/**
+
     public static void main(String args[]) {
         Othello game = new Othello(8, 8);
         OthelloGameState currentGameState = game.gameState.get(game.gameState.size() - 1);
@@ -80,6 +80,5 @@ public class Othello {
         reader.close();
     }
 
- */
 }
 

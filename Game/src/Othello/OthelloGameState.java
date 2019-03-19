@@ -52,18 +52,6 @@ public class OthelloGameState {
     			if (cell.isWhite()) whiteScore++;
     		}
     }
-
-    public String changePlayer()
-    {
-        if(isBlackTurn()) {
-            return Othello.PLAYER_2;
-        }
-        else
-        {
-            return Othello.PLAYER_1;
-        }
-    }
-    
     // isBlackTurn() returns true if it is currently the black player's
     // turn in this game state, false otherwise.
     public boolean isBlackTurn() {
@@ -89,7 +77,6 @@ public class OthelloGameState {
     public void makeMove(int x, int y) {
     	int xCoord, yCoord, xDelta, yDelta;
     	Disk opposingColor = (isWhiteTurn()) ? Disk.BLACK : Disk.WHITE;
-
     	if (isValidMove(x, y)) {
     		gameBoard.placeElement(x, y, (isWhiteTurn()) ? Disk.WHITE : Disk.BLACK);
     		
@@ -104,31 +91,37 @@ public class OthelloGameState {
     				yCoord -= yDelta;
     			}
     		}
-    		
+    		checkScore();
     		changeTurn();
     	}
-    	else {
-    		System.out.println("Invalid move!");
-    	}
+    	//else {
+    	//	System.out.println("Invalid move!");
+    	//}
     }
 
     // isGameOver() returns true if the game is over in this game state,
     // false otherwise.
     public boolean isGameOver() {
-        return gameOver;
+        return checkGameOver();
     }
-    
+
     // checkGameOver() modifies and sets gameOver attribute to true if
     // the game is over in this game state, false otherwise.
-    public void checkGameOver() {
-    	for (ArrayList<OthelloCell> column : gameBoard.getBoard()) {
-            for (OthelloCell othelloCell : column)
-                if (othelloCell.isEmpty()) {
-                    gameOver = false;
-                    return;
-                }
+    public boolean checkGameOver() {
+        if(blackScore == 0 || whiteScore == 0)
+        {
+            return true;
         }
-    	gameOver = true;
+        else
+        {
+            for (ArrayList<OthelloCell> column : gameBoard.getBoard()) {
+                for (OthelloCell othelloCell : column)
+                    if (othelloCell.isEmpty()) {
+                        return false;
+                    }
+            }
+            return true;
+        }
     }
     
     public String getPlayerTurn() {
