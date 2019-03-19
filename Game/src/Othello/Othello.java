@@ -32,8 +32,16 @@ public class Othello {
     }
 
     public String determineWinner(OthelloGameState gameState) {
-        if (gameState.getBlackScore() > gameState.getWhiteScore()) return "BLACK";
-        if (gameState.getBlackScore() < gameState.getWhiteScore()) return "WHITE";
+        if (gameState.getBlackScore() > gameState.getWhiteScore())
+        {
+            int score = players.get(0).getScore();
+            players.get(1).setScore(players.get(0).getScore() );
+            return "BLACK";
+        }
+        if (gameState.getBlackScore() < gameState.getWhiteScore()){
+            players.get(0).setScore(1 + players.get(1).getScore());
+            return "WHITE";
+        }
         return "TIE";
     }
 

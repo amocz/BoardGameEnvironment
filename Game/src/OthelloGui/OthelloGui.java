@@ -26,13 +26,9 @@ public class OthelloGui extends JFrame {
 
         game = new Othello(8, 8, players);
         currentGameState = game.getGameStates().get(game.getGameStates().size() - 1);
-        setBoard(currentGameState.getGameBoard());
+        board = currentGameState.getGameBoard();
         initialize();
         this.setVisible(true);
-    }
-
-    public void setBoard(OthelloGameBoard gb) {
-        this.board = gb;
     }
 
     public void initialize() {
@@ -81,20 +77,19 @@ public class OthelloGui extends JFrame {
                     }
                     else
                     {
+                        JFrame f = new JFrame();
+
                         if(game.determineWinner(currentGameState).equals("TIE"))
                         {
-                            JOptionPane.showMessageDialog(null, "It's a TIE!");
-                            System.exit(0);
+                            JOptionPane.showMessageDialog(f, "It's a TIE!");
                         }
                         if(game.determineWinner(currentGameState).equals("BLACK"))
                         {
-                            JOptionPane.showMessageDialog(null, "BLACK WINS");
-                            System.exit(0);
+                            JOptionPane.showMessageDialog(f, "BLACK WINS");
                         }
                         if(game.determineWinner(currentGameState).equals("WHITE"))
                         {
-                            JOptionPane.showMessageDialog(null, "WHITE WINS");
-                            System.exit(0);
+                            JOptionPane.showMessageDialog(f, "WHITE WINS");
                         }
                     }
                 }

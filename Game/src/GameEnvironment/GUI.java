@@ -192,7 +192,6 @@ public class GUI extends JFrame implements ActionListener
 		}
   	}
 
-		
 	public void actionPerformed(ActionEvent e){
 		if(TTTbutton == e.getSource())
 		{
