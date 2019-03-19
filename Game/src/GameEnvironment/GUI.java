@@ -199,6 +199,7 @@ public class GUI extends JFrame implements ActionListener
 		}
 		else if(BSbutton == e.getSource())
 		{
+			new BattleShip(players);
 		}
 		else if(Mbutton == e.getSource())
 		{
